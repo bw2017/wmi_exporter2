@@ -192,7 +192,7 @@ type IISCollector struct {
 }
 
 // NewIISCollector ...
-func NewIISCollector() (Collector, error) {
+func NewIISCollector() (Collector, string, error) {
 	const subsystem = "iis"
 
 	buildIIS := &IISCollector{
@@ -813,7 +813,7 @@ func NewIISCollector() (Collector, error) {
 
 	buildIIS.iis_version = getIISVersion()
 
-	return buildIIS, nil
+	return buildIIS, "", nil
 }
 
 // Collect sends the metric values for each metric

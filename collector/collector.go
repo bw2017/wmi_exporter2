@@ -47,8 +47,7 @@ func getWindowsVersion() float64 {
 	return currentv_flt
 }
 
-// Factories ...
-var Factories = make(map[string]func() (Collector, error))
+var Factories = make(map[string]func() (Collector, string, error))
 
 // Collector is the interface a collector has to implement.
 type Collector interface {
@@ -61,8 +60,8 @@ type ScrapeContext struct {
 }
 
 // PrepareScrapeContext creates a ScrapeContext to be used during a single scrape
-func PrepareScrapeContext() (*ScrapeContext, error) {
-	objs, err := getPerflibSnapshot()
+func PrepareScrapeContext(perflibObjects string) (*ScrapeContext, error) {
+	objs, err := getPerflibSnapshot(perflibObjects)
 	if err != nil {
 		return nil, err
 	}

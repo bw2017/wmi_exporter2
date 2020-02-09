@@ -25,7 +25,7 @@ type adfsCollector struct {
 }
 
 // newADFSCollector constructs a new adfsCollector
-func newADFSCollector() (Collector, error) {
+func newADFSCollector() (Collector, string, error) {
 	const subsystem = "adfs"
 
 	return &adfsCollector{
@@ -95,7 +95,7 @@ func newADFSCollector() (Collector, error) {
 			nil,
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 type perflibADFS struct {

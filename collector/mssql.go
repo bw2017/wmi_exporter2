@@ -384,7 +384,7 @@ type MSSQLCollector struct {
 }
 
 // NewMSSQLCollector ...
-func NewMSSQLCollector() (Collector, error) {
+func NewMSSQLCollector() (Collector, string, error) {
 
 	const subsystem = "mssql"
 
@@ -1758,7 +1758,7 @@ func NewMSSQLCollector() (Collector, error) {
 		os.Exit(0)
 	}
 
-	return &mssqlCollector, nil
+	return &mssqlCollector, "", nil
 }
 
 type mssqlCollectorFunc func(ch chan<- prometheus.Metric, sqlInstance string) (*prometheus.Desc, error)

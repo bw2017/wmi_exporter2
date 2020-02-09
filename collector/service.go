@@ -32,7 +32,7 @@ type serviceCollector struct {
 }
 
 // NewserviceCollector ...
-func NewserviceCollector() (Collector, error) {
+func NewserviceCollector() (Collector, string, error) {
 	const subsystem = "service"
 
 	if *serviceWhereClause == "" {
@@ -59,7 +59,7 @@ func NewserviceCollector() (Collector, error) {
 			nil,
 		),
 		queryWhereClause: *serviceWhereClause,
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

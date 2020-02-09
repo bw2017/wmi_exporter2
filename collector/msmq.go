@@ -30,7 +30,7 @@ type Win32_PerfRawData_MSMQ_MSMQQueueCollector struct {
 }
 
 // NewWin32_PerfRawData_MSMQ_MSMQQueueCollector ...
-func NewMSMQCollector() (Collector, error) {
+func NewMSMQCollector() (Collector, string, error) {
 	const subsystem = "msmq"
 
 	if *msmqWhereClause == "" {
@@ -63,7 +63,7 @@ func NewMSMQCollector() (Collector, error) {
 			nil,
 		),
 		queryWhereClause: *msmqWhereClause,
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

@@ -27,7 +27,7 @@ type TCPCollector struct {
 }
 
 // NewTCPCollector ...
-func NewTCPCollector() (Collector, error) {
+func NewTCPCollector() (Collector, string, error) {
 	const subsystem = "tcp"
 
 	return &TCPCollector{
@@ -85,7 +85,7 @@ func NewTCPCollector() (Collector, error) {
 			nil,
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

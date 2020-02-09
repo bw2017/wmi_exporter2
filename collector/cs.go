@@ -21,7 +21,7 @@ type CSCollector struct {
 }
 
 // NewCSCollector ...
-func NewCSCollector() (Collector, error) {
+func NewCSCollector() (Collector, string, error) {
 	const subsystem = "cs"
 
 	return &CSCollector{
@@ -37,7 +37,7 @@ func NewCSCollector() (Collector, error) {
 			nil,
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

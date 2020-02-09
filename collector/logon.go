@@ -20,7 +20,7 @@ type LogonCollector struct {
 }
 
 // NewLogonCollector ...
-func NewLogonCollector() (Collector, error) {
+func NewLogonCollector() (Collector, string, error) {
 	const subsystem = "logon"
 
 	return &LogonCollector{
@@ -30,7 +30,7 @@ func NewLogonCollector() (Collector, error) {
 			[]string{"status"},
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

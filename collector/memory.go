@@ -51,7 +51,7 @@ type MemoryCollector struct {
 }
 
 // NewMemoryCollector ...
-func NewMemoryCollector() (Collector, error) {
+func NewMemoryCollector() (Collector, string, error) {
 	const subsystem = "memory"
 
 	return &MemoryCollector{
@@ -250,7 +250,7 @@ func NewMemoryCollector() (Collector, error) {
 			nil,
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

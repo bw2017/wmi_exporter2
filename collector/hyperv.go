@@ -113,7 +113,7 @@ type HyperVCollector struct {
 }
 
 // NewHyperVCollector ...
-func NewHyperVCollector() (Collector, error) {
+func NewHyperVCollector() (Collector, string, error) {
 	buildSubsystemName := func(component string) string { return "hyperv_" + component }
 	return &HyperVCollector{
 		HealthCritical: prometheus.NewDesc(
@@ -592,7 +592,7 @@ func NewHyperVCollector() (Collector, error) {
 			[]string{"vm_interface"},
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

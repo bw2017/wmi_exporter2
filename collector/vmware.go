@@ -39,7 +39,7 @@ type VmwareCollector struct {
 }
 
 // NewVmwareCollector constructs a new VmwareCollector
-func NewVmwareCollector() (Collector, error) {
+func NewVmwareCollector() (Collector, string, error) {
 	const subsystem = "vmware"
 	return &VmwareCollector{
 		MemActive: prometheus.NewDesc(
@@ -157,7 +157,7 @@ func NewVmwareCollector() (Collector, error) {
 			nil,
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

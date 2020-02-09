@@ -41,7 +41,7 @@ type DNSCollector struct {
 }
 
 // NewDNSCollector ...
-func NewDNSCollector() (Collector, error) {
+func NewDNSCollector() (Collector, string, error) {
 	const subsystem = "dns"
 	return &DNSCollector{
 		ZoneTransferRequestsReceived: prometheus.NewDesc(
@@ -176,7 +176,7 @@ func NewDNSCollector() (Collector, error) {
 			nil,
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

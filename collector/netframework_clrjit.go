@@ -21,7 +21,7 @@ type NETFramework_NETCLRJitCollector struct {
 }
 
 // NewNETFramework_NETCLRJitCollector ...
-func NewNETFramework_NETCLRJitCollector() (Collector, error) {
+func NewNETFramework_NETCLRJitCollector() (Collector, string, error) {
 	const subsystem = "netframework_clrjit"
 	return &NETFramework_NETCLRJitCollector{
 		NumberofMethodsJitted: prometheus.NewDesc(
@@ -48,7 +48,7 @@ func NewNETFramework_NETCLRJitCollector() (Collector, error) {
 			[]string{"process"},
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

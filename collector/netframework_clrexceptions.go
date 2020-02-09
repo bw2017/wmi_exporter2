@@ -21,7 +21,7 @@ type NETFramework_NETCLRExceptionsCollector struct {
 }
 
 // NewNETFramework_NETCLRExceptionsCollector ...
-func NewNETFramework_NETCLRExceptionsCollector() (Collector, error) {
+func NewNETFramework_NETCLRExceptionsCollector() (Collector, string, error) {
 	const subsystem = "netframework_clrexceptions"
 	return &NETFramework_NETCLRExceptionsCollector{
 		NumberofExcepsThrown: prometheus.NewDesc(
@@ -48,7 +48,7 @@ func NewNETFramework_NETCLRExceptionsCollector() (Collector, error) {
 			[]string{"process"},
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

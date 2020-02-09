@@ -33,7 +33,7 @@ type OSCollector struct {
 }
 
 // NewOSCollector ...
-func NewOSCollector() (Collector, error) {
+func NewOSCollector() (Collector, string, error) {
 	const subsystem = "os"
 
 	return &OSCollector{
@@ -115,7 +115,7 @@ func NewOSCollector() (Collector, error) {
 			nil,
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

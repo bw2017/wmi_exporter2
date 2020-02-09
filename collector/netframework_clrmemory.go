@@ -32,7 +32,7 @@ type NETFramework_NETCLRMemoryCollector struct {
 }
 
 // NewNETFramework_NETCLRMemoryCollector ...
-func NewNETFramework_NETCLRMemoryCollector() (Collector, error) {
+func NewNETFramework_NETCLRMemoryCollector() (Collector, string, error) {
 	const subsystem = "netframework_clrmemory"
 	return &NETFramework_NETCLRMemoryCollector{
 		AllocatedBytes: prometheus.NewDesc(
@@ -107,7 +107,7 @@ func NewNETFramework_NETCLRMemoryCollector() (Collector, error) {
 			[]string{"process"},
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

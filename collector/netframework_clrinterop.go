@@ -20,7 +20,7 @@ type NETFramework_NETCLRInteropCollector struct {
 }
 
 // NewNETFramework_NETCLRInteropCollector ...
-func NewNETFramework_NETCLRInteropCollector() (Collector, error) {
+func NewNETFramework_NETCLRInteropCollector() (Collector, string, error) {
 	const subsystem = "netframework_clrinterop"
 	return &NETFramework_NETCLRInteropCollector{
 		NumberofCCWs: prometheus.NewDesc(
@@ -41,7 +41,7 @@ func NewNETFramework_NETCLRInteropCollector() (Collector, error) {
 			[]string{"process"},
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

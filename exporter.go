@@ -27,6 +27,7 @@ import (
 type WmiCollector struct {
 	maxScrapeDuration time.Duration
 	collectors        map[string]collector.Collector
+	perflibObjects    string
 }
 
 const (
@@ -97,7 +98,7 @@ func (coll WmiCollector) Collect(ch chan<- prometheus.Metric) {
 	)
 
 	t := time.Now()
-	scrapeContext, err := collector.PrepareScrapeContext()
+	scrapeContext, err := collector.PrepareScrapeContext(coll.perflibObjects)
 	ch <- prometheus.MustNewConstMetric(
 		snapshotDuration,
 		prometheus.GaugeValue,
@@ -234,22 +235,32 @@ func expandEnabledCollectors(enabled string) []string {
 	return result
 }
 
-func loadCollectors(list string) (map[string]collector.Collector, error) {
+func loadCollectors(list string) (map[string]collector.Collector, string, error) {
 	collectors := map[string]collector.Collector{}
+	objs := map[string]bool{}
 	enabled := expandEnabledCollectors(list)
 
 	for _, name := range enabled {
 		fn, ok := collector.Factories[name]
 		if !ok {
-			return nil, fmt.Errorf("collector '%s' not available", name)
+			return nil, "", fmt.Errorf("collector '%s' not available", name)
 		}
-		c, err := fn()
+		c, o, err := fn()
 		if err != nil {
-			return nil, err
+			return nil, "", err
 		}
 		collectors[name] = c
+		if o != "" {
+			objs[collector.MapCounterToIndex(o)] = true
+		}
 	}
-	return collectors, nil
+
+	var objects []string
+	for o := range objs {
+		objects = append(objects, o)
+	}
+
+	return collectors, strings.Join(objects, " "), nil
 }
 
 func initWbem() {
@@ -324,7 +335,7 @@ func main() {
 		}()
 	}
 
-	collectors, err := loadCollectors(*enabledCollectors)
+	collectors, objs, err := loadCollectors(*enabledCollectors)
 	if err != nil {
 		log.Fatalf("Couldn't load collectors: %s", err)
 	}
@@ -336,6 +347,7 @@ func main() {
 		collectorFactory: func(timeout time.Duration) *WmiCollector {
 			return &WmiCollector{
 				collectors:        collectors,
+				perflibObjects:    objs,
 				maxScrapeDuration: timeout,
 			}
 		},

@@ -24,7 +24,7 @@ type NETFramework_NETCLRLocksAndThreadsCollector struct {
 }
 
 // NewNETFramework_NETCLRLocksAndThreadsCollector ...
-func NewNETFramework_NETCLRLocksAndThreadsCollector() (Collector, error) {
+func NewNETFramework_NETCLRLocksAndThreadsCollector() (Collector, string, error) {
 	const subsystem = "netframework_clrlocksandthreads"
 	return &NETFramework_NETCLRLocksAndThreadsCollector{
 		CurrentQueueLength: prometheus.NewDesc(
@@ -69,7 +69,7 @@ func NewNETFramework_NETCLRLocksAndThreadsCollector() (Collector, error) {
 			[]string{"process"},
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

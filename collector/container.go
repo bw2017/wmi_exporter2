@@ -39,7 +39,7 @@ type ContainerMetricsCollector struct {
 }
 
 // NewContainerMetricsCollector constructs a new ContainerMetricsCollector
-func NewContainerMetricsCollector() (Collector, error) {
+func NewContainerMetricsCollector() (Collector, string, error) {
 	const subsystem = "container"
 	return &ContainerMetricsCollector{
 		ContainerAvailable: prometheus.NewDesc(
@@ -126,7 +126,7 @@ func NewContainerMetricsCollector() (Collector, error) {
 			[]string{"container_id", "interface"},
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

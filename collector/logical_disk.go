@@ -48,7 +48,7 @@ type LogicalDiskCollector struct {
 }
 
 // NewLogicalDiskCollector ...
-func NewLogicalDiskCollector() (Collector, error) {
+func NewLogicalDiskCollector() (Collector, string, error) {
 	const subsystem = "logical_disk"
 
 	return &LogicalDiskCollector{
@@ -152,7 +152,7 @@ func NewLogicalDiskCollector() (Collector, error) {
 
 		volumeWhitelistPattern: regexp.MustCompile(fmt.Sprintf("^(?:%s)$", *volumeWhitelist)),
 		volumeBlacklistPattern: regexp.MustCompile(fmt.Sprintf("^(?:%s)$", *volumeBlacklist)),
-	}, nil
+	}, "LogicalDisk", nil
 }
 
 // Collect sends the metric values for each metric

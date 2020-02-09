@@ -21,7 +21,7 @@ type NETFramework_NETCLRSecurityCollector struct {
 }
 
 // NewNETFramework_NETCLRSecurityCollector ...
-func NewNETFramework_NETCLRSecurityCollector() (Collector, error) {
+func NewNETFramework_NETCLRSecurityCollector() (Collector, string, error) {
 	const subsystem = "netframework_clrsecurity"
 	return &NETFramework_NETCLRSecurityCollector{
 		NumberLinkTimeChecks: prometheus.NewDesc(
@@ -48,7 +48,7 @@ func NewNETFramework_NETCLRSecurityCollector() (Collector, error) {
 			[]string{"process"},
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

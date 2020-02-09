@@ -26,7 +26,7 @@ type NETFramework_NETCLRLoadingCollector struct {
 }
 
 // NewNETFramework_NETCLRLoadingCollector ...
-func NewNETFramework_NETCLRLoadingCollector() (Collector, error) {
+func NewNETFramework_NETCLRLoadingCollector() (Collector, string, error) {
 	const subsystem = "netframework_clrloading"
 	return &NETFramework_NETCLRLoadingCollector{
 		BytesinLoaderHeap: prometheus.NewDesc(
@@ -83,7 +83,7 @@ func NewNETFramework_NETCLRLoadingCollector() (Collector, error) {
 			[]string{"process"},
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

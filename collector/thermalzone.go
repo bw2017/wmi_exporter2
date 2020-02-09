@@ -18,7 +18,7 @@ type thermalZoneCollector struct {
 }
 
 // NewThermalZoneCollector ...
-func NewThermalZoneCollector() (Collector, error) {
+func NewThermalZoneCollector() (Collector, string, error) {
 	const subsystem = "thermalzone"
 	return &thermalZoneCollector{
 		Temperature: prometheus.NewDesc(
@@ -45,7 +45,7 @@ func NewThermalZoneCollector() (Collector, error) {
 			},
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

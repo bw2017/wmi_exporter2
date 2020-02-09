@@ -22,7 +22,7 @@ type SystemCollector struct {
 }
 
 // NewSystemCollector ...
-func NewSystemCollector() (Collector, error) {
+func NewSystemCollector() (Collector, string, error) {
 	const subsystem = "system"
 
 	return &SystemCollector{
@@ -62,7 +62,7 @@ func NewSystemCollector() (Collector, error) {
 			nil,
 			nil,
 		),
-	}, nil
+	}, "System", nil
 }
 
 // Collect sends the metric values for each metric

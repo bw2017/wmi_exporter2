@@ -23,7 +23,7 @@ type NETFramework_NETCLRRemotingCollector struct {
 }
 
 // NewNETFramework_NETCLRRemotingCollector ...
-func NewNETFramework_NETCLRRemotingCollector() (Collector, error) {
+func NewNETFramework_NETCLRRemotingCollector() (Collector, string, error) {
 	const subsystem = "netframework_clrremoting"
 	return &NETFramework_NETCLRRemotingCollector{
 		Channels: prometheus.NewDesc(
@@ -62,7 +62,7 @@ func NewNETFramework_NETCLRRemotingCollector() (Collector, error) {
 			[]string{"process"},
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

@@ -80,7 +80,7 @@ type ADCollector struct {
 }
 
 // NewADCollector ...
-func NewADCollector() (Collector, error) {
+func NewADCollector() (Collector, string, error) {
 	const subsystem = "ad"
 	return &ADCollector{
 		AddressBookOperationsTotal: prometheus.NewDesc(
@@ -449,7 +449,7 @@ func NewADCollector() (Collector, error) {
 			nil,
 			nil,
 		),
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

@@ -43,7 +43,7 @@ type ProcessCollector struct {
 }
 
 // NewProcessCollector ...
-func NewProcessCollector() (Collector, error) {
+func NewProcessCollector() (Collector, string, error) {
 	const subsystem = "process"
 
 	if *processWhereClause == "" {
@@ -130,7 +130,7 @@ func NewProcessCollector() (Collector, error) {
 			nil,
 		),
 		queryWhereClause: *processWhereClause,
-	}, nil
+	}, "", nil
 }
 
 // Collect sends the metric values for each metric

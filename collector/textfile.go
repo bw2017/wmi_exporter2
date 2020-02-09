@@ -59,10 +59,10 @@ func init() {
 
 // NewTextFileCollector returns a new Collector exposing metrics read from files
 // in the given textfile directory.
-func NewTextFileCollector() (Collector, error) {
+func NewTextFileCollector() (Collector, string, error) {
 	return &textFileCollector{
 		path: *textFileDirectory,
-	}, nil
+	}, "", nil
 }
 
 func convertMetricFamily(metricFamily *dto.MetricFamily, ch chan<- prometheus.Metric) {

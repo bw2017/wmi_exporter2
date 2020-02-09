@@ -47,7 +47,7 @@ type NetworkCollector struct {
 }
 
 // NewNetworkCollector ...
-func NewNetworkCollector() (Collector, error) {
+func NewNetworkCollector() (Collector, string, error) {
 	const subsystem = "net"
 
 	return &NetworkCollector{
@@ -126,7 +126,7 @@ func NewNetworkCollector() (Collector, error) {
 
 		nicWhitelistPattern: regexp.MustCompile(fmt.Sprintf("^(?:%s)$", *nicWhitelist)),
 		nicBlacklistPattern: regexp.MustCompile(fmt.Sprintf("^(?:%s)$", *nicBlacklist)),
-	}, nil
+	}, "Network Interface", nil
 }
 
 // Collect sends the metric values for each metric
