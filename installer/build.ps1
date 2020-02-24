@@ -10,6 +10,8 @@ Param (
 )
 $ErrorActionPreference = "Stop"
 
+$VerbosePreference = "Continue"
+
 # Get absolute path to executable before switching directories
 $PathToExecutable = Resolve-Path $PathToExecutable
 # Set working dir to this directory, reset previous on exit
@@ -44,7 +46,8 @@ mkdir -Force Work, Output | Out-Null
 
 Write-Verbose "Downloading WiX..."
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-Get-FileIfNotExists "https://github.com/wixtoolset/wix3/releases/download/wix311rtm/wix311-binaries.zip" "$sourceDir\wix-binaries.zip"
+# Get-FileIfNotExists "https://github.com/wixtoolset/wix3/releases/download/wix3112rtm/wix311-binaries.zip" "$sourceDir\wix-binaries.zip"
+Get-FileIfNotExists "http://172.18.1.249:9081/software/msi/wix311-binaries.zip" "$sourceDir\wix-binaries.zip"
 mkdir -Force WiX | Out-Null
 Expand-Archive -Path "${sourceDir}\wix-binaries.zip" -DestinationPath WiX -Force
 
@@ -53,7 +56,9 @@ Copy-Item -Force $PathToExecutable Work/wmi_exporter.exe
 Write-Verbose "Creating wmi_exporter-${Version}-${Arch}.msi"
 $wixArch = @{"amd64" = "x64"; "386" = "x86"}[$Arch]
 $wixOpts = "-ext WixFirewallExtension -ext WixUtilExtension"
+Write-Verbose "Invoke-Expression WiX\candle.exe -nologo -arch $wixArch $wixOpts -out Work\wmi_exporter.wixobj -dVersion=`"$Version`" wmi_exporter.wxs"
 Invoke-Expression "WiX\candle.exe -nologo -arch $wixArch $wixOpts -out Work\wmi_exporter.wixobj -dVersion=`"$Version`" wmi_exporter.wxs"
+Write-Verbose "Invoke-Expression WiX\light.exe -nologo -spdb $wixOpts -out `"Output\wmi_exporter-${Version}-${Arch}.msi`" Work\wmi_exporter.wixobj"
 Invoke-Expression "WiX\light.exe -nologo -spdb $wixOpts -out `"Output\wmi_exporter-${Version}-${Arch}.msi`" Work\wmi_exporter.wixobj"
 
 Write-Verbose "Done!"
