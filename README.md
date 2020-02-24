@@ -94,6 +94,13 @@ The prometheus metrics will be exposed on [localhost:9182](http://localhost:9182
 	mkdir $HOME/go
 	docker run --rm -ti --privileged -v $HOME/go:/go docker.io/golang:1.13 /bin/bash -c 'git clone https://github.com/bw2017/wmi_exporter.git; cd wmi_exporter; /bin/bash ./compiler-using-docker-on-linux.sh'
 
+## Package as MSI file
+    ## Run the following command in the CMD window of Win10/Win7/...
+    git clone https://github.com/bw2017/wmi_exporter.git
+	cd wmi_exporter\installer
+	powershell .\build.ps1 ..\wmi_exporter.exe 1.0
+	## wmi_exporter-1.0-amd64.msi will appear in the "Output" folder
+
 ## Examples
 
 ### Enable only service collector and specify a custom query
