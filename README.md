@@ -94,7 +94,7 @@ The prometheus metrics will be exposed on [localhost:9182](http://localhost:9182
 	mkdir $HOME/go
 	docker run --rm -ti --privileged -v $HOME/go:/go docker.io/golang:1.13 /bin/bash -c 'git clone https://github.com/bw2017/wmi_exporter.git; cd wmi_exporter; /bin/bash ./compiler-using-docker-on-linux.sh'
 
-## Examples aa
+## Examples
 
 ### Enable only service collector and specify a custom query
 
