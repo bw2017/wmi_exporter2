@@ -1,4 +1,4 @@
-module github.com/martinlindhe/wmi_exporter
+module github.com/bw2017/wmi_exporter
 
 go 1.13
 
